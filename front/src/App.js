@@ -8,6 +8,8 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 import MyPage from "./pages/MyPage/MyPage";
 import WritePostPage from "./pages/WritePostPage/WritePostPage";
 
+import WritePostModal from "./components/WritePostModal/WritePostModal";
+
 function App() {
   return (
     <div className="app-container">
@@ -19,6 +21,8 @@ function App() {
         <Route path="/search" element={<SearchPage />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/write" element={<WritePostPage />}></Route>
+
+        <Route path="/test/write" element={<WritePostModal />}></Route>
       </Routes>
     </div>
   );
