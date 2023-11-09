@@ -106,58 +106,60 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.nav_bar}>
         <h1 className={styles.title}>셰푸 회원가입</h1>
       </div>
-      <div className={styles.form_container}>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="email"
-            className="input"
-            placeholder="아이디(이메일)"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <input
-            type="password"
-            className="input"
-            placeholder="비밀번호"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-          <input
-            type="password"
-            className={styles.input}
-            placeholder="비밀번호 확인"
-            name="passwordCheck"
-            value={passwordCheck}
-            onChange={handlePasswordCheckChange}
-          />
-          <input
-            type="tel"
-            className={styles.input}
-            placeholder="휴대전화 번호(ex. 010-0000-0000)"
-            name="phone"
-            value={phone}
-            onChange={handlePhoneChange}
-          />
-          <input
-            type="text"
-            className={styles.input}
-            placeholder="닉네임"
-            name="name"
-            value={name}
-            onChange={handleNameChange}
-          />
-          <button type="submit" className={styles.signup_button}>
-            회원가입
-          </button>
-        </form>
+      <div className={styles.container}>
+        <div className={styles.form_container}>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              placeholder="아이디(이메일)"
+              name="email"
+              value={email}
+              className={styles.input}
+              onChange={handleEmailChange}
+            />
+            <input
+              type="password"
+              placeholder="비밀번호"
+              name="password"
+              value={password}
+              className={styles.input}
+              onChange={handlePasswordChange}
+            />
+            <input
+              type="password"
+              placeholder="비밀번호 확인"
+              name="passwordCheck"
+              value={passwordCheck}
+              className={styles.input}
+              onChange={handlePasswordCheckChange}
+            />
+            <input
+              type="tel"
+              placeholder="휴대전화 번호(ex. 010-0000-0000)"
+              name="phone"
+              value={phone}
+              className={styles.input}
+              onChange={handlePhoneChange}
+            />
+            <input
+              type="text"
+              placeholder="닉네임"
+              name="name"
+              value={name}
+              className={styles.input}
+              onChange={handleNameChange}
+            />
+            <button type="submit" className={styles.signup_button}>
+              회원가입
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
