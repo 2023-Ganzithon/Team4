@@ -33,34 +33,32 @@ const LoginPage = () => {
 
     if (email === "" || password === "") {
       alert("이메일과 비밀번호 모두 입력하세요.");
-    } else {
-      if (!emailValidCheck(email)) {
-        alert("이메일 형식이 올바르지 않습니다.");
-        setEmail("");
-      }
-    }
-
-    // test code
-    alert("로그인 성공");
-    navigate("/");
-
-    /*
-    const request = {
-      username: email,
-      password: password,
-    };
-
-    const response = await API.post("/login", request);
-
-    if (response.status === 200) {
-      const { key } = response.data;
-      navigate("/");
-    } else {
-      alert("회원정보가 존재하지 않습니다.");
+    } else if (!emailValidCheck(email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
       setEmail("");
-      setPassword("");
+    } else {
+      // test code
+      alert("로그인 성공");
+      navigate("/");
+
+      /*
+      const request = {
+        username: email,
+        password: password,
+      };
+
+      const response = await API.post("/login", request);
+
+      if (response.status === 200) {
+        const { key } = response.data;
+        navigate("/");
+      } else {
+        alert("회원정보가 존재하지 않습니다.");
+        setEmail("");
+        setPassword("");
+      }
+      */
     }
-    */
   };
 
   return (

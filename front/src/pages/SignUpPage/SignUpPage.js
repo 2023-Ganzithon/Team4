@@ -56,53 +56,49 @@ const SignUpPage = () => {
       name === ""
     ) {
       alert("모든 값을 입력해주세요.");
+    } else if (!emailValidCheck(email)) {
+      alert("이메일 형식이 올바르지 않습니다.");
+      setEmail("");
+    } else if (password !== passwordCheck) {
+      alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+      setPasswordCheck("");
+    } else if (!phoneValidCheck(phone)) {
+      alert("휴대폰 번호 형식이 올바르지 않습니다.");
+      setPhone("");
     } else {
-      if (!emailValidCheck(email)) {
-        alert("이메일 형식이 올바르지 않습니다.");
-        setEmail("");
-      }
-      if (password !== passwordCheck) {
-        alert("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
-        setPasswordCheck("");
-      }
-      if (!phoneValidCheck(phone)) {
-        alert("휴대폰 번호 형식이 올바르지 않습니다.");
-        setPhone("");
-      }
-    }
-
-    // test code
-    alert("회원가입이 완료되었습니다.");
-    navigate("/login");
-
-    /*
-    const request = {
-      email: email,
-      password: password,
-      password_check: passwordCheck,
-      name: name,
-      phone: phone,
-    };
-
-    const response = await API.post("/signup", request);
-    const { errorCause } = response.data;
-
-    if (response.status === 201) {
+      // test code
+      alert("회원가입이 완료되었습니다.");
       navigate("/login");
-    } else {
-      // eslint-disable-next-line default-case
-      switch (errorCause) {
-        case "email":
-          alert("이미 존재하는 이메일 주소입니다.");
-          setEmail("");
-          break;
-        case "phone":
-          alert("이미 존재하는 휴대폰 번호입니다.");
-          setPhone("");
-          break;
+
+      /*
+      const request = {
+        email: email,
+        password: password,
+        password_check: passwordCheck,
+        name: name,
+        phone: phone,
+      };
+
+      const response = await API.post("/signup", request);
+      const { errorCause } = response.data;
+
+      if (response.status === 201) {
+        navigate("/login");
+      } else {
+        // eslint-disable-next-line default-case
+        switch (errorCause) {
+          case "email":
+            alert("이미 존재하는 이메일 주소입니다.");
+            setEmail("");
+            break;
+          case "phone":
+            alert("이미 존재하는 휴대폰 번호입니다.");
+            setPhone("");
+            break;
+        }
       }
+      */
     }
-    */
   };
 
   return (
