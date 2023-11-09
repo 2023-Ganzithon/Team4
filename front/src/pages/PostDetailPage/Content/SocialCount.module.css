@@ -1,0 +1,31 @@
+.socialContainer{
+    width: 100%;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+.likeIcon{
+    width: 13px;
+    height: 13px;
+    display: flex;
+    align-items: center;
+}
+.likeIcon img{
+    width: 100%;
+    height: auto;
+}
+
+.countBox{
+    display: flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    margin: 0px 5px;
+}
+.countBox span{
+    margin: 0px 2px;
+    font-size: 13px;
+    color: #B9B9B9;
+}
