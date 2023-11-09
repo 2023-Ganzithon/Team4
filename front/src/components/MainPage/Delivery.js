@@ -64,7 +64,7 @@ const Delivery = () => {
             <img src={Heart} alt='heart' className={styles.icon}/>
             <div className={styles.likes}>관심 <span>{likes}</span></div>
           </button>
-          <button >
+          <button>
             댓글 <span>10</span>
           </button>
         </div>
