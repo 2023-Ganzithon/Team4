@@ -85,7 +85,7 @@ const SignUpPage = () => {
     };
 
     const response = await API.post("/signup", request);
-    const errorCause = response.data;
+    const { errorCause } = response.data;
 
     if (response.status === 201) {
       navigate("/login");
