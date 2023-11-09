@@ -69,6 +69,11 @@ const WritePostPage = () => {
     setLink(e.target.value);
   };
 
+  const verifyInputs = (inputs) => {
+    if (inputs.includes("")) return false;
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -80,7 +85,10 @@ const WritePostPage = () => {
     // 식료품
     if (type === "grocery") {
       // 식료품 팔아요
-      if (category === 0) {
+      if (
+        category === 0 &&
+        verifyInputs([title, location, content, price, buyTime, unit])
+      ) {
         request = {
           title: title,
           location: location,
@@ -92,7 +100,17 @@ const WritePostPage = () => {
           is_completed: false,
           unit: unit,
         };
-      } else if (category === 1) {
+      } else if (
+        category === 1 &&
+        verifyInputs([
+          title,
+          location,
+          content,
+          price,
+          unit,
+          recruitementNumber,
+        ])
+      ) {
         // 식료품 같이 사요
         request = {
           title: title,
@@ -105,6 +123,8 @@ const WritePostPage = () => {
           post_type: true,
           is_completed: false,
         };
+      } else {
+        alert("모든 내용을 작성해주세요.");
       }
 
       // API.post("/groceries", request, {
@@ -119,25 +139,30 @@ const WritePostPage = () => {
       // });
     } else {
       // 배달음식 함께 주문
-      request = {
-        title: title,
-        content: content,
-        location: location,
-        minimumPrice: price,
-        link: link,
-        image: images,
-      };
 
-      // API.post("/deliveries", request, {
-      //   headers: {
-      //     Authorization: token,
-      //   },
-      // }).then((response) => {
-      //   if (response.status === 201) {
-      //     alert("글이 업로드되었습니다.");
-      //     navigate("/");
-      //   }
-      // });
+      if (verifyInputs([title, content, location, price, link])) {
+        request = {
+          title: title,
+          content: content,
+          location: location,
+          minimumPrice: price,
+          link: link,
+          image: images,
+        };
+
+        // API.post("/deliveries", request, {
+        //   headers: {
+        //     Authorization: token,
+        //   },
+        // }).then((response) => {
+        //   if (response.status === 201) {
+        //     alert("글이 업로드되었습니다.");
+        //     navigate("/");
+        //   }
+        // });
+      } else {
+        alert("모든 내용을 작성해주세요.");
+      }
     }
   };
 
