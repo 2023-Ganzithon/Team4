@@ -41,23 +41,22 @@ const LoginPage = () => {
       alert("로그인 성공");
       navigate("/");
 
-      /*
-      const request = {
-        username: email,
-        password: password,
-      };
+      // const request = {
+      //   username: email,
+      //   password: password,
+      // };
 
-      const response = await API.post("/login", request);
+      // const response = await API.post("/login", request);
 
-      if (response.status === 200) {
-        const { key } = response.data;
-        navigate("/");
-      } else {
-        alert("회원정보가 존재하지 않습니다.");
-        setEmail("");
-        setPassword("");
-      }
-      */
+      // if (response.status === 200) {
+      //   const { key } = response.data;
+      //   localStorage.setItem("login-token", key);
+      //   navigate("/");
+      // } else {
+      //   alert("회원정보가 존재하지 않습니다.");
+      //   setEmail("");
+      //   setPassword("");
+      // }
     }
   };
 

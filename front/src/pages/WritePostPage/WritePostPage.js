@@ -5,8 +5,17 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const WritePostPage = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("login-token") !== undefined) {
+      setToken(localStorage.getItem("login-token"));
+    }
+  }, []);
+
   const { state } = useLocation();
   const { type } = state;
+
+  const [token, setToken] = useState();
 
   const [category, setCategory] = useState(0);
 
@@ -98,14 +107,16 @@ const WritePostPage = () => {
         };
       }
 
-      /*
-      API.post("/groceries", request).then((response) => {
-        if (response.status === 201) {
-          alert("글이 업로드되었습니다.");
-          navigate("/");
-        }
-      });
-      */
+      // API.post("/groceries", request, {
+      //   headers: {
+      //     Authorization: token,
+      //   },
+      // }).then((response) => {
+      //   if (response.status === 201) {
+      //     alert("글이 업로드되었습니다.");
+      //     navigate("/");
+      //   }
+      // });
     } else {
       // 배달음식 함께 주문
       request = {
@@ -117,14 +128,16 @@ const WritePostPage = () => {
         image: images,
       };
 
-      /*
-      API.post("/deliveries", request).then((response) => {
-        if (response.status === 201) {
-          alert("글이 업로드되었습니다.");
-          navigate("/");
-        }
-      });
-      */
+      // API.post("/deliveries", request, {
+      //   headers: {
+      //     Authorization: token,
+      //   },
+      // }).then((response) => {
+      //   if (response.status === 201) {
+      //     alert("글이 업로드되었습니다.");
+      //     navigate("/");
+      //   }
+      // });
     }
   };
 
