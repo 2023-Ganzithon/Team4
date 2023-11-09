@@ -1,8 +1,8 @@
 .container{
     margin: 4%;
     padding: 10px 18px;
-    width: 82%;
-    min-height: 250px;
+    width: 82vw;
+    min-height: 60vh;
     height: auto;
     border-radius: 6px;
     display: flex;
@@ -11,6 +11,6 @@
     background-color: #ffffff;
 }
 .header{
-    width: 100%;
-    height: 70px;
+    width: 100vw;
+    height: 20vh;
 }
