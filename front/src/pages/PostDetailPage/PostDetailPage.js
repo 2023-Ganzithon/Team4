@@ -4,6 +4,7 @@ import Comment from "./Comment/Comment";
 import style from "./PostDetailPage.module.css";
 import back from "../../assets/image/back_arrow.png";
 import BuyBtn from "./Buy/BuyBtn";
+import WriteComment from "./Comment/WriteComment";
 
 const PostDetailPage = () => {
   return <div className={style.wrapper}>
@@ -16,6 +17,7 @@ const PostDetailPage = () => {
     <PostContent />
     <Comment />
     <BuyBtn />
+    <WriteComment />
   </div>;
 };
 
