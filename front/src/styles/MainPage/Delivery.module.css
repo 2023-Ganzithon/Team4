@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+}
+.delivery {
+  height: 362px;
+  background-color: white;
+  border-radius: 6px;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.title_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-size: 17px;
+  font-weight: bold;
+  width: 240px;
+  overflow: hidden;
+  white-space: nowrap; /*텍스트 한 줄 표시*/
+}
+.upload_time {
+  color: #B8B8B8;
+  font-size: 13px;
+}
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.status {
+  width: 58px;
+  line-height: 24px;
+  height: 24px;
+  background-color: #FEF7EC;
+  color: #F2AB58;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 4px;
+}
+.price, .location, .purchase_date {
+  display: flex;
+  align-items: center;
+}
+.image_container {
+  display: flex;
+  gap: 10px;
+}
+.upload_image {
+  background-color: #D9D9D9;
+  border-radius: 20px;
+  width: 70px;
+  height: 70px;
+}
+.post_contents {
+  font-size: 13px;
+  width: 306px;
+  height: 37px;
+  overflow: hidden; /* 내용이 넘치면 잘라냅니다. */
+  text-overflow: ellipsis; /* 넘치는 텍스트를 생략부호(...)로 표시합니다. */
+  margin: 5px 0;
+}
+.comments {
+  border-top: 1px solid #D9D9D9;
+  display: flex;
+  gap: 10px;
+  padding-top: 14px;
+}
+.like_btn {
+  display: flex;
+  align-items: center;
+}
+.icon {
+  height: 16px;
+  margin-right: 10px;
+}
+button {
+  border: none;
+  background-color: white;
+  padding: 0;
+  cursor: pointer;
+}

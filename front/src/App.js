@@ -7,7 +7,7 @@ import PostDetailPage from "./pages/PostDetailPage/PostDetailPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import MyPage from "./pages/MyPage/MyPage";
 import WritePostPage from "./pages/WritePostPage/WritePostPage";
-
+import { LowerNavBar } from "./components/NavBar/LowerNavBar";
 function App() {
   return (
     <div className="app-container">
@@ -20,6 +20,7 @@ function App() {
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/write" element={<WritePostPage />}></Route>
       </Routes>
+      <LowerNavBar/>
     </div>
   );
 }
