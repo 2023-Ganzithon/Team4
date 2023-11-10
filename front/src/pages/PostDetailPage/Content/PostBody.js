@@ -9,6 +9,7 @@ const PostBody = () => {
     const [title, setTitle] = useState("제목입니다 제목입니다 제목입니다 제목입니다!");
     const [uploadTime, setUploadTime] = useState("5분전");
     const [clickMore, setClickMore] = useState(false);
+    const [type, setType] = useState("팔아요");
     const [priceInfo, setPriceInfo] = useState("3000원");
     const [mapInfo, setMapInfo] = useState("공릉2동");
     const [timeInfo, setTimeInfo] = useState("하루 전 구매");
@@ -29,7 +30,9 @@ const PostBody = () => {
             </div>
         </div>
 
-        <div className={style.sell}></div>
+        <div className={style.sell}>
+            <span>{type}</span>
+        </div>
 
         <div className={style.informationBox}>
             <div className={style.information}>

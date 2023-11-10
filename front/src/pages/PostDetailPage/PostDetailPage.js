@@ -7,6 +7,8 @@ import BuyBtn from "./Buy/BuyBtn";
 import WriteComment from "./Comment/WriteComment";
 
 const PostDetailPage = () => {
+  const getContent = async() => {};
+
   return <div className={style.wrapper}>
   <div className={style.header}>
     <div className={style.back}>
