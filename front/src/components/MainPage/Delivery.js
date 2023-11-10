@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import axios from 'axios';
 import styles from '../../styles/MainPage/Delivery.module.css'
 
@@ -12,6 +12,8 @@ import FillHeart from '../../assets/image/fill_heart_icon.png'
 const Delivery = () => {
   let text = '포도 두 송이 남는데 가져가실분ㅇㅇ'
   const [likes, setLikes] = useState(0);
+  const [showMenuModal, setShowMenuModal] = useState(false);
+  const modalRef = useRef();
   const onClickHeartBtn = async () => {
     try {
       const response = await axios.put('/api/likes', { likes: likes + 1 });
@@ -22,13 +24,40 @@ const Delivery = () => {
       console.error('Error increasing likes', error);
     }
   }
+  const clickMenu = () => {
+    setShowMenuModal(true);
+  }
+
+  useEffect(() => {
+    // modalRef가 현재 null이 아니라면 해당 요소가 이벤트의 타겟을 포함하지 않는지 확인
+    const handleClickOutside = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
+        setShowMenuModal(false);
+      }
+    };
+
+    // 클릭 이벤트 리스너 등록
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // 컴포넌트 unmount 시, 이벤트 리스너 해제
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenuModal]);
   return (
     <div className={styles.delivery}>
       <div className={styles.title_container}>
         <div className={styles.title}>{text}</div>
-        <div className={styles.upload_time}>5분전</div>
-        <div className={styles.menu}>
+        <div className={styles.upload_time}>5분 전</div>
+        <div className={styles.menu} onClick={clickMenu}>
           <img src={Navigation} alt='icon_navigation'/>
+          {showMenuModal ? 
+          <div className={styles.modal} ref={modalRef}>
+          <div>수정/삭제</div>
+        </div> :
+        null
+          }
+          
         </div>
       </div>
       <div className={styles.contents}>

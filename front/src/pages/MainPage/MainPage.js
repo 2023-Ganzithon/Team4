@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import styles from "../../styles/MainPage/MainPage.module.css";
+import styles from "./MainPage.module.css";
 import Delivery from "../../components/MainPage/Delivery"
 const MainPage = () => {
   const [listType, setListType] = useState('ingredients');
@@ -31,6 +31,8 @@ const MainPage = () => {
       </div>
       {/* type에 따라 컨텐츠 분기 */}
       <div className={styles.posts_lists}>
+        <Delivery/>
+        <Delivery/>
         <Delivery/>
       </div>
     </div>

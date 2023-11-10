@@ -26,6 +26,22 @@
   color: #B8B8B8;
   font-size: 13px;
 }
+.menu {
+  position: relative;
+  cursor: pointer;
+}
+.modal {
+  white-space: nowrap; /*텍스트 한 줄 표시*/
+  text-align: center;
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-70%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
+  background-color: white;
+  box-shadow: 2px 2px 5px gray;
+  padding: 10px;
+  border-radius: 5px;
+}
 .contents {
   display: flex;
   flex-direction: column;
@@ -82,4 +98,5 @@ button {
   background-color: white;
   padding: 0;
   cursor: pointer;
+  color: #B8B8B8;
 }
