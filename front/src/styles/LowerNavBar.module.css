@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+  color: initial;
+}
 .lowerNavBar {
   width: 375px;
   height: 86px;
@@ -28,7 +32,6 @@
 }
 .modal {
   height: 90px;
-  color: white;
   font-size: 16px;
   background-color: #4CAF50;
   padding: 0 12px;
@@ -39,11 +42,14 @@
   transform: translateX(-50%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
   border-radius: 6px;
 }
-.modal > div {
+.modal > a {
+  display: block;
   text-align: center;
   line-height: 45px;
+  color: white;
+
 }
-.modal > div:first-child {
+.modal > a:first-child {
   border-bottom: 1px solid white;
 }
 .modal:after {
@@ -55,4 +61,7 @@
   border-style: solid;
   border-color: #4CAF50 transparent transparent transparent;  /* 상하좌우 테두리 색상 */
   transform: translateX(-50%);  /* 화살표가 말풍선의 중앙에 오도록 */
+}
+a:hover {
+  color: #D9D9D9;
 }

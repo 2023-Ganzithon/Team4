@@ -1,14 +1,17 @@
 * {
   box-sizing: border-box;
 }
-.delivery {
-  height: 362px;
+a {
+  color: #B8B8B8;
+}
+.post {
   background-color: white;
   border-radius: 6px;
   padding: 12px 18px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  position: relative;
 }
 .title_container {
   display: flex;
@@ -48,14 +51,13 @@
   gap: 10px;
 }
 .status {
-  width: 58px;
-  line-height: 24px;
+  display: inline-block;
   height: 24px;
   background-color: #FEF7EC;
   color: #F2AB58;
-  text-align: center;
   font-size: 12px;
   border-radius: 4px;
+  padding: 4px 12px;
 }
 .price, .location, .purchase_date {
   display: flex;
@@ -74,7 +76,7 @@
 .post_contents {
   font-size: 13px;
   width: 306px;
-  height: 37px;
+  height: 35px;
   overflow: hidden; /* 내용이 넘치면 잘라냅니다. */
   text-overflow: ellipsis; /* 넘치는 텍스트를 생략부호(...)로 표시합니다. */
   margin: 5px 0;
@@ -99,4 +101,24 @@ button {
   padding: 0;
   cursor: pointer;
   color: #B8B8B8;
+}
+
+/* 완료 게시글 커버 */
+.cover {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.27);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cover_status {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
 }
