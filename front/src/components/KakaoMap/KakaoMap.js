@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styles from "./KakaoMap.module.css";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
+import { Map, MapMarker, Circle } from "react-kakao-maps-sdk";
 
-const { kakao } = window;
-
-const KakaoMap = () => {
+const KakaoMap = ({ radius, setLoc }) => {
   const [location, setLocation] = useState({
     center: {
       lat: 33.450701,
@@ -27,6 +25,11 @@ const KakaoMap = () => {
             },
             isLoading: false,
           }));
+
+          setLoc({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
         },
         (err) => {
           setLocation((prev) => ({
@@ -44,17 +47,50 @@ const KakaoMap = () => {
         isLoading: false,
       }));
     }
+
+    setDrawingCircleData({
+      center: {
+        lat: location.center.lat,
+        lng: location.center.lng,
+      },
+      radius: radius,
+    });
   }, []);
 
-  const [position, setPosition] = useState();
+  useEffect(() => {
+    setDrawingCircleData({
+      center: {
+        lat: position ? position.lat : location.center.lat,
+        lng: position ? position.lng : location.center.lng,
+      },
+      radius: radius,
+    });
+  }, [radius]);
 
+  const [position, setPosition] = useState();
   const [deleteDefaultMarker, setDeleteDefaultMarker] = useState(false);
+
+  const [drawingCircleData, setDrawingCircleData] = useState(); // 그려지고 있는 상태를 가지고 있을 변수
 
   const onClick = (_t, mouseEvent) => {
     setPosition({
       lat: mouseEvent.latLng.getLat(),
       lng: mouseEvent.latLng.getLng(),
     });
+
+    setLoc({
+      lat: mouseEvent.latLng.getLat(),
+      lng: mouseEvent.latLng.getLng(),
+    });
+
+    setDrawingCircleData({
+      center: {
+        lat: mouseEvent.latLng.getLat(),
+        lng: mouseEvent.latLng.getLng(),
+      },
+      radius: radius,
+    });
+
     setDeleteDefaultMarker(true);
   };
 
@@ -63,13 +99,25 @@ const KakaoMap = () => {
       <Map // 지도를 표시할 Container
         center={location.center}
         className={styles.map}
-        level={3} // 지도의 확대 레벨
+        level={5} // 지도의 확대 레벨
         onClick={onClick}
       >
         {!location.isLoading && (
-          <MapMarker
-            position={deleteDefaultMarker ? position : location.center}
-          />
+          <>
+            <MapMarker
+              position={deleteDefaultMarker ? position : location.center}
+            />
+            <Circle
+              center={drawingCircleData.center}
+              radius={drawingCircleData.radius}
+              strokeWeight={1} // 선의 두께입니다
+              strokeColor={"#00a0e9"} // 선의 색깔입니다
+              strokeOpacity={0.1} // 선의 불투명도입니다 0에서 1 사이값이며 0에 가까울수록 투명합니다
+              strokeStyle={"solid"} // 선의 스타일입니다
+              fillColor={"#00a0e9"} // 채우기 색깔입니다
+              fillOpacity={0.2} // 채우기 불투명도입니다
+            />
+          </>
         )}
       </Map>
     </>

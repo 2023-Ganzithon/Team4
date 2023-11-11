@@ -1,6 +1,6 @@
 .modal_container {
   width: 80%;
-  height: 411px;
+  height: 400px;
 
   display: flex;
   flex-direction: column;
@@ -9,7 +9,11 @@
 
   background-color: white;
   border-radius: 6px;
-  padding: 0 16px;
+  padding: 16px;
+}
+
+.submit_button {
+  margin-top: 10px;
 }
 
 .guide_text_container {
@@ -53,4 +57,13 @@ p {
 .radius {
   font-size: 13px;
   transform: translate(0, 2px);
+}
+
+.submit_button {
+  width: 90%;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
 }
