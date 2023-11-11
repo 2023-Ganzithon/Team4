@@ -3,11 +3,11 @@ import UserProfile from './UserProfile';
 import PostBody from './PostBody';
 import SocialCount from './SocialCount';
 
-const PostContent = () => {
+const PostContent = ({ posts }) => {
     return <div className={style.container}>
-        <UserProfile />
-        <PostBody />
-        <SocialCount />
+        <UserProfile posts={ posts }/>
+        <PostBody posts={ posts }/>
+        <SocialCount posts={ posts }/>
     </div>;
 };
 

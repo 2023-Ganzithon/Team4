@@ -8,8 +8,8 @@
     place-items: center;
 }
 .btnContainerClear{
-    width: 100%;
-    height: 10vh;
+    width: 375px;
+    height: 10%;
     background-color: #F2AB58;
     position: fixed;
     bottom: 0px;

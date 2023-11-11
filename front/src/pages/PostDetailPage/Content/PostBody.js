@@ -5,30 +5,38 @@ import price from "../../../assets/image/price_tag_icon.png";
 import map from "../../../assets/image/map_icon.png"
 import timer from "../../../assets/image/timer_icon.png"
 
-const PostBody = () => {
-    const [title, setTitle] = useState("제목입니다 제목입니다 제목입니다 제목입니다!");
-    const [uploadTime, setUploadTime] = useState("5분전");
+const PostBody = ({posts}) => {
     const [clickMore, setClickMore] = useState(false);
     const [type, setType] = useState("팔아요");
     const [priceInfo, setPriceInfo] = useState("3000원");
-    const [mapInfo, setMapInfo] = useState("공릉2동");
     const [timeInfo, setTimeInfo] = useState("하루 전 구매");
-    const [infoText, setInfoText] = useState("맛있는 포도 포도포도 포도포도 \n포도포도 포도포도 포도포도");
+
+    const moreHandler = () => {
+        setClickMore(!clickMore);
+    };
 
     return <div className={style.postContainer}>
         <div className={style.postHeader}>
         <div className={style.title}>
-            <span>{title}</span>
+            <span>{posts.title}</span>
         </div>
             <div className={style.rightHeader}>
                 <span className={style.uploadTime}>
-                    {uploadTime}
+                    {posts.created_at}
                 </span>
-                <div className={style.moreBtn}>
+                <div className={style.moreBtn} onClick={moreHandler}>
                     <img src={moreBtn} alt="more"/>
                 </div>
             </div>
         </div>
+        {clickMore && <div className={style.moreContainer}>
+            <div className={style.edit}>
+                <span>수정</span>
+            </div>
+            <div className={style.delete}>
+                <span>삭제</span>
+            </div>
+        </div>}
 
         <div className={style.sell}>
             <span>{type}</span>
@@ -41,7 +49,7 @@ const PostBody = () => {
             </div>
             <div className={style.information}>
                 <img src={map} alt="map"/>
-                <span className={style.infoText}>{mapInfo}</span>
+                <span className={style.infoText}>{posts.location}</span>
             </div>
             <div className={style.information}>
                 <img src={timer} alt="timer"/>
@@ -56,7 +64,7 @@ const PostBody = () => {
         </div>
 
         <div className={style.textBox}>
-            <span>{infoText}</span>
+            <span>{posts.content}</span>
         </div>
     </div>
 };

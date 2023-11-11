@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import style from "./SearchPage.module.css";
 import back from "../../assets/image/back_arrow.png";
 import cancel from "../../assets/image/cancel.png";
@@ -11,10 +12,26 @@ const SearchPage = () => {
     setInputText(e.target.value);
   };
 
+  const history = useNavigate();
   const handleEnterPress = (e) => {
+
       if (e.key === 'Enter' && inputText) {
+        //검색시
+        const searchKeyword = inputText;
+        fetch(`/home/deliveries/?search=${encodeURIComponent(searchKeyword)}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("서버 연결에 실패했습니다.");
+          }
+          return response.json()
+        })
+        .then(data => {
+          // 검색 결과
+          history('/search-results',{ state: { searchResults: data } });
+        })
+        .catch(error => console.error("[ERROR] ", error));
           keepLength(inputText);
-          setInputText(''); // 입력 상자 초기화
+          setInputText('');
       }
   };
 
@@ -22,13 +39,16 @@ const SearchPage = () => {
     setRecentSearchText(currentSearchTexts => {
       const updatedSearchTexts = [...currentSearchTexts, newText];
 
-      // 배열 길이가 8을 초과하면, 가장 오래된 항목(첫 번째 요소)을 제거
       if (updatedSearchTexts.length > 7) {
-          updatedSearchTexts.shift(); // 배열의 첫 번째 요소 제거
+          updatedSearchTexts.shift();
       }
 
       return updatedSearchTexts;
-  });
+    });
+  };
+
+  const deleteSearch = () => {
+    setRecentSearchText([]);
   };
 
   return <div className={style.wrapper}>
@@ -47,7 +67,8 @@ const SearchPage = () => {
     <div className={style.recentSearchBox}>
       <div className={style.recentHeader}>
         <span className={style.recent}>최근검색어</span>
-        <span className={style.delete}>전체삭제</span>
+        <span className={style.delete} 
+        onClick={deleteSearch}>전체삭제</span>
       </div>
 
       <div className={style.recentSearch}>
