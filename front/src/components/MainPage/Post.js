@@ -70,7 +70,7 @@ const Post = ({type, data, key}) => {
         setShowMenuModal(false);
       }
     };
-
+    console.log(data)
     // 클릭 이벤트 리스너 등록
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -122,10 +122,10 @@ const Post = ({type, data, key}) => {
             </div>
             <div className={styles.image_container}>
               {/* 4개까지만 보이기 */}
+              {/* <div className={styles.upload_image}></div>
               <div className={styles.upload_image}></div>
               <div className={styles.upload_image}></div>
-              <div className={styles.upload_image}></div>
-              <div className={styles.upload_image}></div>
+              <div className={styles.upload_image}></div> */}
             </div>
             <div className={styles.post_contents}>
             {data.content}
@@ -161,10 +161,10 @@ const Post = ({type, data, key}) => {
             </div>
             <div className={styles.image_container}>
               {/* 4개까지만 보이기 */}
+              {/* <div className={styles.upload_image}></div>
               <div className={styles.upload_image}></div>
               <div className={styles.upload_image}></div>
-              <div className={styles.upload_image}></div>
-              <div className={styles.upload_image}></div>
+              <div className={styles.upload_image}></div> */}
             </div>
             <div className={styles.post_contents}>
              {data.content}

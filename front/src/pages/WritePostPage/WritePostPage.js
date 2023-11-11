@@ -87,11 +87,27 @@ const WritePostPage = () => {
         category === 0 &&
         verifyInputs([title, location, content, price, buyTime, unit])
       ) {
-        // request = {
+        request = {
+          title: title,
+          location: location,
+          content: content,
+          image: "e3",
+          price: price,
+          buy_time: buyTime,
+          post_type: false,
+          is_completed: false,
+          unit: unit,
+          "latitude" : 37.5077601,
+          "longitude" : 126.786485
+
+        };
+
+        /* formData 구성 */
+        // const request = new FormData();
+        // const contentsData = {
         //   title: title,
         //   location: location,
         //   content: content,
-        //   image: images,
         //   price: price,
         //   buy_time: buyTime,
         //   post_type: false,
@@ -99,26 +115,13 @@ const WritePostPage = () => {
         //   unit: unit,
         // };
 
-        /* formData 구성 */
-        const request = new FormData();
-        const contentsData = {
-          title: title,
-          location: location,
-          content: content,
-          price: price,
-          buy_time: buyTime,
-          post_type: false,
-          is_completed: false,
-          unit: unit,
-        };
+        // const fileData = images;
+        // request.append("file", fileData);
 
-        const fileData = images;
-        request.append("file", fileData);
-
-        request.append(
-          "contentsData",
-          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
-        );
+        // request.append(
+        //   "contentsData",
+        //   new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        // );
       } else if (
         category === 1 &&
         verifyInputs([
@@ -131,52 +134,57 @@ const WritePostPage = () => {
         ])
       ) {
         // 식료품 같이 사요
-        // request = {
-        // title: title,
-        // location: location,
-        // content: content,
-        // image: images,
-        // price: price,
-        // unit: unit,
-        // recruitment_num: recruitementNumber,
-        // post_type: true,
-        // is_completed: false,
-        // };
-
-        /* formData 구성 */
-        const request = new FormData();
-        const contentsData = {
-          title: title,
-          location: location,
-          content: content,
-          price: price,
-          unit: unit,
-          recruitment_num: recruitementNumber,
-          post_type: true,
-          is_completed: false,
+        request = {
+        title: title,
+        location: location,
+        content: content,
+        image: "ee",
+        price: price,
+        unit: unit,
+        recruitment_num: recruitementNumber,
+        post_type: true,
+        is_completed: false,          
+        "latitude" : 37.5077601,
+        "longitude" : 126.786485
         };
 
-        const fileData = images;
-        request.append("file", fileData);
+        /* formData 구성 */
+        // const request = new FormData();
+        // const contentsData = {
+        //   title: title,
+        //   location: location,
+        //   content: content,
+        //   price: price,
+        //   unit: unit,
+        //   recruitment_num: recruitementNumber,
+        //   post_type: true,
+        //   is_completed: false,
+        // };
 
-        request.append(
-          "contentsData",
-          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
-        );
+        // const fileData = images;
+        // request.append("file", fileData);
+
+        // request.append(
+        //   "contentsData",
+        //   new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        // );
       } else {
         alert("모든 내용을 작성해주세요.");
       }
 
-      API.post("/groceries/", request, {
+      API.post("home/groceries/", request, {
         headers: {
           Authorization: `Token ${token}`,
-          "Content-Type": "multipart/form-data",
+          // "Content-Type": "multipart/form-data",
         },
       }).then((response) => {
         if (response.status === 201) {
           alert("글이 업로드되었습니다.");
           navigate("/");
         }
+      }).catch((error) => {
+        const errorMessage = error.response.data;
+        console.log(errorMessage);
       });
     } else {
       // 배달음식 함께 주문
