@@ -67,10 +67,9 @@ const SignUpPage = () => {
       setPhone("");
     } else {
       // test code
-      alert("회원가입이 완료되었습니다.");
-      navigate("/login");
+      // alert("회원가입이 완료되었습니다.");
+      // navigate("/login");
 
-      /*
       const request = {
         email: email,
         password: password,
@@ -97,7 +96,6 @@ const SignUpPage = () => {
             break;
         }
       }
-      */
     }
   };
 
