@@ -1,0 +1,13 @@
+.modal_container {
+  width: 318px;
+  height: 411px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 6px;
+  padding: 6px;
+}
