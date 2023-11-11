@@ -1,0 +1,46 @@
+.myPage {
+  padding: 0 16px;
+}
+.profile {
+  height: 83px;
+  border-radius: 6px;
+  background-color: white;
+  margin-bottom: 16px;
+  padding: 0 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.profile_information {
+  flex: 1;
+  font-size: 13px;
+}
+.profile_image {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  object-fit: cover; /* 이미지의 비율을 유지하면서, 지정한 높이와 너비에 맞게 조절 */
+  margin-right: 11px;
+}
+.modify_btn {
+  border: 1px solid #D9D9D9;
+  color: #D9D9D9;
+  padding: 0 8px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+}
+.menu_list {
+  background-color: white;
+  border-radius: 6px;
+  padding: 11px 14px;
+  padding-top: 0;
+}
+.menu {
+  border-bottom: 1px solid #CCCCCC;
+  height: 52px;
+  line-height: 52px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}

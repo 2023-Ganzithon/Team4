@@ -1,0 +1,22 @@
+.userProfile{
+    width: 100%;
+    height: 70px;
+    border-bottom: solid 1px #D9D9D9;
+    display: flex;
+    align-items: center;
+}
+.profileImg{
+    width: 47px;
+    height: 47px;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    margin-right: 10px;
+}
+.profileNickname{
+    font-size: 13px;
+    color: #141414;
+    font-weight: bold;
+}
+.profileNickname p{
+    margin: 3px 0px;
+}
