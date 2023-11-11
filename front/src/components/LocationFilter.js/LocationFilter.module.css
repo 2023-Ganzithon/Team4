@@ -1,5 +1,5 @@
 .modal_container {
-  width: 318px;
+  width: 80%;
   height: 411px;
 
   display: flex;
@@ -9,5 +9,48 @@
 
   background-color: white;
   border-radius: 6px;
-  padding: 6px;
+  padding: 0 16px;
+}
+
+.guide_text_container {
+  margin-top: 10px;
+  display: block;
+}
+
+.marker_icon {
+  background-image: url("../../assets/image/map_icon.png");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.guide_text {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 3px 0;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.radius {
+  margin-left: auto;
+}
+
+p {
+  margin: 0;
+}
+
+#range-slider {
+  width: 600px;
+  margin: auto;
+}
+
+.radius {
+  font-size: 13px;
+  transform: translate(0, 2px);
 }

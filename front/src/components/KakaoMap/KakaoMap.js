@@ -62,10 +62,7 @@ const KakaoMap = () => {
     <>
       <Map // 지도를 표시할 Container
         center={location.center}
-        style={{
-          width: "100%",
-          height: "80%",
-        }}
+        className={styles.map}
         level={3} // 지도의 확대 레벨
         onClick={onClick}
       >
@@ -75,15 +72,6 @@ const KakaoMap = () => {
           />
         )}
       </Map>
-      {position && (
-        <p>
-          {"클릭한 위치의 위도는 " +
-            position.lat +
-            " 이고, 경도는 " +
-            position.lng +
-            " 입니다"}
-        </p>
-      )}
     </>
   );
 };
