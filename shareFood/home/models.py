@@ -120,8 +120,4 @@ class RecentSearch(models.Model):
 
             recent_search = cls(user=user, query=query)
             recent_search.save()
-
-
-class Position(models.Model):
-    latitude = models.FloatField(max_length=100, null=False)
-    longitude = models.FloatField(max_length=100, null=False)
+            

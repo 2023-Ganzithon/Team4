@@ -117,9 +117,3 @@ class GroceryApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroceryApplication
         fields = '__all__'
-
-
-class PositionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Position
-        fields = ['latitude', 'longitude', 'post_id']

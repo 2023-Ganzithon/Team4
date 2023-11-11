@@ -22,9 +22,9 @@ urlpatterns = [
     # 식료품 댓글 삭제, 수정
     path('groceries/<int:post_id>/comments/<int:comment_id>/', GroceryCommentDetailView.as_view(), name='delivery-comments-create'),
     
-    path('position/groceries/<int:post_id>/', GroceryNearInfoView.as_view()),
-    path('position/deliveries/<int:post_id>/', DeliveryNearInfoView.as_view()),
-    path('position/', PositionView.as_view()),
+    # path('position/groceries/<int:post_id>/', GroceryNearInfoView.as_view()),
+    # path('position/deliveries/<int:post_id>/', DeliveryNearInfoView.as_view()),
+    # path('position/', PositionView.as_view()),
 
 
 
