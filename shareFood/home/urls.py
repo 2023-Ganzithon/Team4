@@ -43,4 +43,5 @@ urlpatterns = [
     
     #최근검색어
     path('api/recent-searches/', RecentSearchView.recent_searches_list, name='recent-searches-list'),
+    
 ]
