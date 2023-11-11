@@ -24,6 +24,8 @@
   display: flex;
   flex-direction: column;
   gap: 19px;
+  height: 548px;
+  overflow-y: scroll;
 }
 
 /* 위치 입력 모달 */

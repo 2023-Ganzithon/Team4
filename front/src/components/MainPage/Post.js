@@ -74,7 +74,7 @@ const Post = ({type, data, key}) => {
     };
   }, [showMenuModal]);
   return (
-    <Link to={`/post/${data.id}`} className={styles.post} key={key}>
+    <Link to={`/post/${data.id}`} state={{type : type, id : data.id}} className={styles.post} key={key}>
       {data.is_completed ? 
       <div className={styles.cover}>
         <div className={styles.cover_status}>판매 완료</div>

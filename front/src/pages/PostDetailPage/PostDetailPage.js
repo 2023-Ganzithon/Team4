@@ -1,5 +1,5 @@
-import React from "react";
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useLocation, useParams } from 'react-router-dom';
 import PostContent from "./Content/PostContent";
 import Comment from "./Comment/Comment";
 import style from "./PostDetailPage.module.css";
@@ -8,6 +8,35 @@ import BuyBtn from "./Buy/BuyBtn";
 import WriteComment from "./Comment/WriteComment";
 
 const PostDetailPage = () => {
+  // let {id} = useParams();
+  const location = useLocation();
+  const type = location.state.type;
+  const id = location.state.id;
+
+  useEffect(() => {
+    console.log(type, id)
+  },[]);
+
+  const getContent = async () => {
+    let url = "/groceries/" + {id};
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error('[ERROR] 알수없는 이유로 오류가 발생했습니다.');
+      }
+  
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("[ERROR] 에러발생", error);
+    }
+  };
   /*
   const location = useLocation();
   const {id} = location.state;
