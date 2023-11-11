@@ -1,0 +1,69 @@
+.modal_container {
+  width: 80%;
+  height: 400px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: white;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.submit_button {
+  margin-top: 10px;
+}
+
+.guide_text_container {
+  margin-top: 10px;
+  display: block;
+}
+
+.marker_icon {
+  background-image: url("../../assets/image/map_icon.png");
+  width: 20px;
+  height: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.guide_text {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 3px 0;
+}
+
+.text {
+  font-size: 16px;
+}
+
+.radius {
+  margin-left: auto;
+}
+
+p {
+  margin: 0;
+}
+
+#range-slider {
+  width: 600px;
+  margin: auto;
+}
+
+.radius {
+  font-size: 13px;
+  transform: translate(0, 2px);
+}
+
+.submit_button {
+  width: 90%;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: white;
+}
