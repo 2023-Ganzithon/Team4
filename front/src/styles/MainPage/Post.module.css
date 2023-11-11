@@ -78,6 +78,9 @@ a {
   display: flex;
   align-items: center;
 }
+.purchase_date > a:hover {
+  text-decoration: underline;
+}
 .image_container {
   display: flex;
   gap: 10px;

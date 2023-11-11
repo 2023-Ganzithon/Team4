@@ -149,7 +149,9 @@ const Post = ({type, data, key}) => {
             </div>
             <div className={styles.purchase_date}>
               <img src={LinkIcon} alt='timer' className={styles.icon}/>
-              <Link to={data.link} target='_blank'>{data.link}</Link>
+              <Link to={data.link} target='_blank' onClick={(e)=>{
+                e.stopPropagation();
+              }}>{data.link}</Link>
             </div>
             <div className={styles.image_container}>
               {/* 4개까지만 보이기 */}
@@ -170,9 +172,7 @@ const Post = ({type, data, key}) => {
               }
                 <div className={styles.likes}>관심 <span>{data.like_cnt}</span></div>
               </button>
-              <button>
-                <Link to="/post">댓글 {data.comments.length}</Link>
-              </button>
+              <div>댓글 {data.comments.length}</div>
             </div>
           </div>
         )
