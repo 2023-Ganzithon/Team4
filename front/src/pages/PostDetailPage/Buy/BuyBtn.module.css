@@ -1,0 +1,28 @@
+.btnContainer{
+    width: 375px;
+    height: 10%;
+    background-color: #4CAF50;
+    position: fixed;
+    bottom: 0px;
+    display: grid;
+    place-items: center;
+}
+.btnContainerClear{
+    width: 375px;
+    height: 10%;
+    background-color: #F2AB58;
+    position: fixed;
+    bottom: 0px;
+    display: grid;
+    place-items: center;
+}
+.btnContainer span{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+}
+.btnContainerClear span{
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bold;
+}
