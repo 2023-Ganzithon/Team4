@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styles from "./ImageUploader.module.css";
 import deleteButton from "../../assets/image/cancel_icon.png";
 
-const ImageUploader = ({ setFileList }) => {
+const ImageUploader = ({ setImage }) => {
   const [images, setImages] = useState([]);
 
   const onUpload = (e) => {
     const imageLists = e.target.files;
+    setImage(e.target.files[0]);
     let imageUrlLists = [...images];
 
     for (let i = 0; i < imageLists.length; i++) {
@@ -15,8 +16,8 @@ const ImageUploader = ({ setFileList }) => {
     }
 
     // 사진 개수 3장으로 제한
-    if (imageUrlLists.length > 3) {
-      imageUrlLists = imageUrlLists.slice(0, 3);
+    if (imageUrlLists.length > 1) {
+      imageUrlLists = imageUrlLists.slice(0, 1);
     }
 
     setImages(imageUrlLists);
