@@ -11,12 +11,11 @@ const MainPage = () => {
   const [inputLocationValue, setInputLocationValue] = useState('');
   const [deliveries, setDeliveries] = useState([]);
   const [groceries, setGroceries] = useState([]);
-
   
   
 
   const Axios = axios.create({
-    baseURL: "https://33000086-b2a7-409c-bd45-5ea52501a43d.mock.pstmn.io",
+    baseURL: "http://127.0.0.1:8000",
     headers: {
       accept: "application/json",
     },
@@ -54,24 +53,24 @@ const MainPage = () => {
   };
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const [deliveryResponse, groceryResponse] = await Promise.all([
-          Axios.get("/home/deliveries"),
-          Axios.get("/home/groceries")
-        ]);
-        const jsonDeliveries = deliveryResponse.data;
-        const jsonGroceries = groceryResponse.data;
-        console.log(jsonDeliveries);
-        console.log(jsonGroceries);
-  
-        setDeliveries(jsonDeliveries);
-        setGroceries(jsonGroceries);
-        // 추가적으로 필요한 처리를 여기에 작성하세요.
-      } catch (err) {
-        console.error(err);
-      }
+    try {
+      const [deliveryResponse, groceryResponse] = await Promise.all([
+        Axios.get("/home/deliveries"),
+        Axios.get("/home/groceries")
+      ]);
+      const jsonDeliveries = deliveryResponse.data;
+      const jsonGroceries = groceryResponse.data;
+      console.log(jsonDeliveries);
+      console.log(jsonGroceries);
+
+      setDeliveries(jsonDeliveries);
+      setGroceries(jsonGroceries);
+      // 추가적으로 필요한 처리를 여기에 작성하세요.
+    } catch (err) {
+      console.error(err);
     }
-    fetchData();
+  }
+  fetchData();
   }, [])
 
   return (
@@ -114,10 +113,10 @@ const MainPage = () => {
         </div>
         {listType === 'ingredients' ? (
         <div className={styles.posts_lists}>
-          {groceries.map((grocery) => <Post type='ingredients' data={grocery} key={grocery.id}/>)}
+          {groceries.length > 0 ? groceries.map((grocery) => <Post type='ingredients' data={grocery} key={grocery.id}/>) : <div>없음</div>}
         </div> ) : (
           <div className={styles.posts_lists}>
-          {deliveries.map((delivery) => <Post type='delivery' data={delivery} key={delivery.id}/>)}
+          {deliveries.length > 0 ? deliveries.map((delivery) => <Post type='delivery' data={delivery} key={delivery.id}/>) : <div>없음</div>}
         </div>
         )
       }
