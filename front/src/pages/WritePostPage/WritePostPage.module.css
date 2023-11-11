@@ -1,0 +1,115 @@
+.container {
+  padding: 0 16px 20px 16px;
+}
+
+.content_container {
+  padding: 15px 16px;
+  background-color: white;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+.nav_bar {
+  height: 56px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.title {
+  margin: 0;
+  font-size: 19px;
+}
+
+.form_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 8px 0;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 20px;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.textarea {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  padding: 8px 0;
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 20px;
+  resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.cancel_write_button {
+  background-image: url("../../assets/image/cancel_icon.png");
+  width: 24px;
+  height: 24px;
+  background-size: 24px 24px;
+  border: none;
+  background-color: transparent;
+  margin-right: 5px;
+}
+
+.upload_button {
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50;
+  color: white;
+  padding: 4px 10px;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.category_container {
+  background-color: white;
+  border-radius: 6px;
+  margin-top: 20px;
+  height: 44px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.selected_category_button {
+  background-color: #4caf50;
+  color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category_button {
+  background-color: white;
+  color: black;
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image_attach_guide_text {
+  font-size: 11px;
+  color: #b9b9b9;
+  margin-bottom: 10px;
+  padding: 0;
+}
