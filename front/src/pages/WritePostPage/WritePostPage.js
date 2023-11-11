@@ -130,16 +130,16 @@ const WritePostPage = () => {
         alert("모든 내용을 작성해주세요.");
       }
 
-      // API.post("/groceries", request, {
-      //   headers: {
-      //     Authorization: token,
-      //   },
-      // }).then((response) => {
-      //   if (response.status === 201) {
-      //     alert("글이 업로드되었습니다.");
-      //     navigate("/");
-      //   }
-      // });
+      API.post("/groceries", request, {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }).then((response) => {
+        if (response.status === 201) {
+          alert("글이 업로드되었습니다.");
+          navigate("/");
+        }
+      });
     } else {
       // 배달음식 함께 주문
 
@@ -153,16 +153,16 @@ const WritePostPage = () => {
           image: images,
         };
 
-        // API.post("/deliveries", request, {
-        //   headers: {
-        //     Authorization: token,
-        //   },
-        // }).then((response) => {
-        //   if (response.status === 201) {
-        //     alert("글이 업로드되었습니다.");
-        //     navigate("/");
-        //   }
-        // });
+        API.post("/deliveries", request, {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }).then((response) => {
+          if (response.status === 201) {
+            alert("글이 업로드되었습니다.");
+            navigate("/");
+          }
+        });
       } else {
         alert("모든 내용을 작성해주세요.");
       }
