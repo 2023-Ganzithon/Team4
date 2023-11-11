@@ -28,7 +28,7 @@ const WritePostPage = () => {
   const [buyTime, setBuyTime] = useState("");
   const [recruitementNumber, setRecruitmentNumber] = useState("");
   const [link, setLink] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState();
 
   const onClickSellCategory = () => {
     setCategory(0);
@@ -78,11 +78,6 @@ const WritePostPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // test code
-    alert("글 업로드가 완료되었습니다.");
-
-    console.log("images: ", images);
-
     let request;
 
     // 식료품
@@ -92,17 +87,38 @@ const WritePostPage = () => {
         category === 0 &&
         verifyInputs([title, location, content, price, buyTime, unit])
       ) {
-        request = {
+        // request = {
+        //   title: title,
+        //   location: location,
+        //   content: content,
+        //   image: images,
+        //   price: price,
+        //   buy_time: buyTime,
+        //   post_type: false,
+        //   is_completed: false,
+        //   unit: unit,
+        // };
+
+        /* formData 구성 */
+        const request = new FormData();
+        const contentsData = {
           title: title,
           location: location,
           content: content,
-          image: images,
           price: price,
           buy_time: buyTime,
           post_type: false,
           is_completed: false,
           unit: unit,
         };
+
+        const fileData = images;
+        request.append("file", fileData);
+
+        request.append(
+          "contentsData",
+          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        );
       } else if (
         category === 1 &&
         verifyInputs([
@@ -115,17 +131,38 @@ const WritePostPage = () => {
         ])
       ) {
         // 식료품 같이 사요
-        request = {
+        // request = {
+        // title: title,
+        // location: location,
+        // content: content,
+        // image: images,
+        // price: price,
+        // unit: unit,
+        // recruitment_num: recruitementNumber,
+        // post_type: true,
+        // is_completed: false,
+        // };
+
+        /* formData 구성 */
+        const request = new FormData();
+        const contentsData = {
           title: title,
           location: location,
           content: content,
-          image: images,
           price: price,
           unit: unit,
           recruitment_num: recruitementNumber,
           post_type: true,
           is_completed: false,
         };
+
+        const fileData = images;
+        request.append("file", fileData);
+
+        request.append(
+          "contentsData",
+          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        );
       } else {
         alert("모든 내용을 작성해주세요.");
       }
@@ -133,6 +170,7 @@ const WritePostPage = () => {
       API.post("/groceries", request, {
         headers: {
           Authorization: `Token ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       }).then((response) => {
         if (response.status === 201) {
@@ -143,19 +181,40 @@ const WritePostPage = () => {
     } else {
       // 배달음식 함께 주문
 
-      if (verifyInputs([title, content, location, price, link])) {
-        request = {
+      if (verifyInputs([title, content, price, link])) {
+        // request = {
+        //   title: title,
+        //   content: content,
+        //   location: location,
+        //   minimumPrice: price,
+        //   link: link,
+        //   image: images,
+        // };
+
+        /* formData 구성 */
+        const request = new FormData();
+        const contentsData = {
           title: title,
           content: content,
           location: location,
           minimumPrice: price,
           link: link,
-          image: images,
         };
+
+        const fileData = images;
+        request.append("file", fileData);
+
+        request.append(
+          "contentsData",
+          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        );
+
+        console.log(request);
 
         API.post("/deliveries", request, {
           headers: {
             Authorization: `Token ${token}`,
+            "Content-Type": "multipart/form-data",
           },
         }).then((response) => {
           if (response.status === 201) {
@@ -170,7 +229,6 @@ const WritePostPage = () => {
   };
 
   const onCancelButtonClick = () => {
-    alert("취소 버튼 클릭");
     navigate("/");
   };
 
@@ -297,10 +355,10 @@ const WritePostPage = () => {
                 </>
               )}
               <p className={styles.image_attach_guide_text}>
-                이미지 3장까지 첨부 가능
+                이미지 1장 첨부 가능
               </p>
               <div>
-                <ImageUploader setFileList={setImages} />
+                <ImageUploader setImage={setImages} />
               </div>
             </div>
           </div>

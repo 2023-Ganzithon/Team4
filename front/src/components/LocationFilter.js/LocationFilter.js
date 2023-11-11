@@ -10,6 +10,9 @@ const LocationFilter = () => {
 
   const onClick = () => {
     console.log("onclick");
+    /* 
+    { lat, lng, radius } 
+    */
   };
 
   return (
