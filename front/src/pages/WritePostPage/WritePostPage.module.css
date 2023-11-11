@@ -3,7 +3,7 @@
 }
 
 .content_container {
-  padding: 10px 16px;
+  padding: 15px 16px;
   background-color: white;
   border-radius: 6px;
   margin-top: 20px;
@@ -48,6 +48,10 @@
   border-bottom: 1px solid #cccccc;
   margin-bottom: 20px;
   resize: vertical;
+}
+
+.textarea:focus {
+  outline: none;
 }
 
 .cancel_write_button {
@@ -101,4 +105,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.image_attach_guide_text {
+  font-size: 11px;
+  color: #b9b9b9;
+  margin-bottom: 10px;
+  padding: 0;
 }

@@ -1,0 +1,44 @@
+.input {
+  display: none;
+}
+
+.input_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.image_upload_button {
+  background-image: url("../../assets/image/image_upload_preview.png");
+  width: 70px;
+  height: 70px;
+  background-size: cover;
+  border: none;
+  background-color: transparent;
+}
+
+.image_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.image_div {
+  width: 70px;
+  height: 70px;
+  margin-left: 10px;
+}
+
+.image {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.delete_button {
+  transform: translate(47px, -73px);
+  border: none;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+}

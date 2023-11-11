@@ -9,6 +9,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import WritePostPage from "./pages/WritePostPage/WritePostPage";
 
 import WritePostModal from "./components/WritePostModal/WritePostModal";
+import LocationFilter from "./components/LocationFilter.js/LocationFilter";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/write" element={<WritePostPage />}></Route>
 
         <Route path="/test/write" element={<WritePostModal />}></Route>
+        <Route path="/test/filter" element={<LocationFilter />}></Route>
       </Routes>
     </div>
   );

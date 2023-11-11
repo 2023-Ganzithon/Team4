@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./WritePostPage.module.css";
 import API from "../../services/API";
 import { useNavigate, useLocation } from "react-router-dom";
+import ImageUploader from "../../components/ImageUploader.js/ImageUploader";
 
 const WritePostPage = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const WritePostPage = () => {
   const [buyTime, setBuyTime] = useState("");
   const [recruitementNumber, setRecruitmentNumber] = useState("");
   const [link, setLink] = useState("");
-  const images = [];
+  const [images, setImages] = useState("");
 
   const onClickSellCategory = () => {
     setCategory(0);
@@ -79,6 +80,8 @@ const WritePostPage = () => {
 
     // test code
     alert("글 업로드가 완료되었습니다.");
+
+    console.log("images: ", images);
 
     let request;
 
@@ -293,8 +296,12 @@ const WritePostPage = () => {
                   />
                 </>
               )}
-
-              <div>이미지 추가 기능</div>
+              <p className={styles.image_attach_guide_text}>
+                이미지 3장까지 첨부 가능
+              </p>
+              <div>
+                <ImageUploader setFileList={setImages} />
+              </div>
             </div>
           </div>
         </div>
