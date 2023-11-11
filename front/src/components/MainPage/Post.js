@@ -27,9 +27,15 @@ const Post = ({type, data, key}) => {
     try {
       let response;
       if (type === 'ingredients') {
-        response = await Axios.post(`/groceries/${data.id}/like/`, { likes: likes + 1 });
+        response = await Axios.post(`home/groceries/${data.id}/like/`, {
+          headers: {
+            'Authorization': `Token ${localStorage.getItem("login-token", key)}`
+          }});
       } else {
-        response = await Axios.post(`/deliveries/${data.id}/like/`, { likes: likes + 1 });
+        response = await Axios.post(`home/deliveries/${data.id}/like/`, { likes: likes + 1 }, {
+          headers: {
+            'Authorization': "Token [토큰값]"
+          }});
       }
       if (response.status === 200) {
       }
@@ -74,7 +80,7 @@ const Post = ({type, data, key}) => {
     };
   }, [showMenuModal]);
   return (
-    <Link to={`/post/${data.id}`} state={{type : type, id : data.id}} className={styles.post} key={key}>
+    <Link to={`/post/${data.id}`} state={{type : type, data: data}} className={styles.post} key={key}>
       {data.is_completed ? 
       <div className={styles.cover}>
         <div className={styles.cover_status}>판매 완료</div>

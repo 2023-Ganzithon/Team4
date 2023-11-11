@@ -46,7 +46,7 @@ const LoginPage = () => {
         password: password,
       };
 
-      const response = await API.post("/login", request);
+      const response = await API.post("/login/", request);
 
       if (response.status === 200) {
         const { key } = response.data;

@@ -73,15 +73,18 @@ const SignUpPage = () => {
       const request = {
         email: email,
         password: password,
-        password_check: passwordCheck,
         name: name,
         phone: phone,
       };
+      console.log(request);
 
-      const response = await API.post("/signup", request);
+      const response = await API.post("/signup/", request, {headers: {
+        'Content-Type': 'application/json'
+      }});
+      console.log(response);
       const { errorCause } = response.data;
-
       if (response.status === 201) {
+        alert('성공')
         navigate("/login");
       } else {
         // eslint-disable-next-line default-case

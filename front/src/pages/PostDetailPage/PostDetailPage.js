@@ -6,19 +6,18 @@ import style from "./PostDetailPage.module.css";
 import back from "../../assets/image/back_arrow.png";
 import BuyBtn from "./Buy/BuyBtn";
 import WriteComment from "./Comment/WriteComment";
+import Post from "../../components/MainPage/Post";
 
 const PostDetailPage = () => {
-  // let {id} = useParams();
   const location = useLocation();
   const type = location.state.type;
-  const id = location.state.id;
+  const data = location.state.data;
 
   useEffect(() => {
-    console.log(type, id)
   },[]);
 
   const getContent = async () => {
-    let url = "/groceries/" + {id};
+    let url = "/groceries/";
     try {
       const response = await fetch(url, {
         method: 'GET',
@@ -95,7 +94,7 @@ const PostDetailPage = () => {
     </div>
     <span>홈으로 가기</span>
   </div>
-    <PostContent posts={postDummy}/>
+    <Post type={type} data={data}/>
     <Comment posts={postDummy}/>
     <BuyBtn />
     <WriteComment />
