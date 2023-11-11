@@ -474,9 +474,24 @@ class GroceryApplicationView(APIView):
 from haversine import haversine, Unit
 
 
+
+# class PositionView(APIView):
+#     #permission_classes = [IsOwnerOrReadOnly]
+
+#     def post(self, request):
+#         serializer = PositionSerializer(data=request.data)
+#         if serializer.is_valid():
+#             position = serializer.save()
+#             #position.user = request.user
+#             position.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         else:
+#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 class DeliveryNearInfoView(APIView):
     def get(self, request, post_id):
-        current_post = get_object_or_404(Delivery, pk=post_id)
+        current_post = get_object_or_404(Position, pk=post_id)
         current_latitude = current_post.latitude
         current_longitude = current_post.longitude
         current_position = (current_latitude, current_longitude)
@@ -500,13 +515,13 @@ class DeliveryNearInfoView(APIView):
 
 class GroceryNearInfoView(APIView):
     def get(self, request, post_id):
-        current_post = get_object_or_404(Grocery, pk=post_id)
+        current_post = get_object_or_404(Position, pk=post_id)
         current_latitude = current_post.latitude
         current_longitude = current_post.longitude
         current_position = (current_latitude, current_longitude)
 
         # Define the proximity range
-        proximity_distance = 2  # Assume 2 kilometers
+        proximity_distance = 500  # Assume 2 kilometers
 
         # Find other posts within the proximity range
         position_infos = Grocery.objects.exclude(pk=post_id).filter(
@@ -520,4 +535,20 @@ class GroceryNearInfoView(APIView):
         serialized_data = GrocerySerializer(near_position_infos, many=True)
 
         return Response(serialized_data.data)
-   
+
+class PositionView(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def post(self, request):
+        serializer = PositionSerializer(data=request.data)
+        if serializer.is_valid():
+            # Create a new Position instance
+            position = serializer.save()
+
+            # Assign the user to the created Position instance
+            #position.user = request.user
+            position.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
