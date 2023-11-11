@@ -22,7 +22,7 @@ const WritePostPage = () => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("location");
   const [price, setPrice] = useState("");
   const [unit, setUnit] = useState("");
   const [buyTime, setBuyTime] = useState("");
@@ -167,7 +167,7 @@ const WritePostPage = () => {
         alert("모든 내용을 작성해주세요.");
       }
 
-      API.post("/groceries", request, {
+      API.post("/groceries/", request, {
         headers: {
           Authorization: `Token ${token}`,
           "Content-Type": "multipart/form-data",
@@ -182,45 +182,51 @@ const WritePostPage = () => {
       // 배달음식 함께 주문
 
       if (verifyInputs([title, content, price, link])) {
-        // request = {
-        //   title: title,
-        //   content: content,
-        //   location: location,
-        //   minimumPrice: price,
-        //   link: link,
-        //   image: images,
-        // };
-
-        /* formData 구성 */
-        const request = new FormData();
-        const contentsData = {
+        request = {
           title: title,
           content: content,
           location: location,
           minimumPrice: price,
           link: link,
+          price: 3000,
+          "latitude" : 37.5077601,
+		      "longitude" : 126.786485
+          // image: images,
         };
 
-        const fileData = images;
-        request.append("file", fileData);
+        /* formData 구성 */
+        // const request = new FormData();
+        // const contentsData = {
+        //   title: title,
+        //   content: content,
+        //   location: location,
+        //   minimumPrice: price,
+        //   link: link,
+        //   latitude: 0,
+        //   longitude: 0,
+        // };
 
-        request.append(
-          "contentsData",
-          new Blob([JSON.stringify(contentsData)], { type: "application/json" })
-        );
+        // const fileData = images;
+        // request.append("file", fileData);
 
-        console.log(request);
+        // request.append(
+        //   "contentsData",
+        //   new Blob([JSON.stringify(contentsData)], { type: "application/json" })
+        // );
 
-        API.post("/deliveries", request, {
+        API.post("home/deliveries/", request, {
           headers: {
             Authorization: `Token ${token}`,
-            "Content-Type": "multipart/form-data",
+            // "Content-Type": "multipart/form-data",
           },
         }).then((response) => {
           if (response.status === 201) {
             alert("글이 업로드되었습니다.");
             navigate("/");
           }
+        }).catch((error) => {
+          const errorMessage = error.response.data;
+          console.log(errorMessage);
         });
       } else {
         alert("모든 내용을 작성해주세요.");

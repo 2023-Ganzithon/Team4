@@ -113,10 +113,10 @@ const MainPage = () => {
         </div>
         {listType === 'ingredients' ? (
         <div className={styles.posts_lists}>
-          {groceries.length > 0 ? groceries.map((grocery) => <Post type='ingredients' data={grocery} key={grocery.id}/>) : <div>없음</div>}
+          {groceries.length > 0 ? groceries.map((grocery) => <Post type='ingredients' data={grocery} key={grocery.id}/>) : <div>{groceries.message}</div>}
         </div> ) : (
           <div className={styles.posts_lists}>
-          {deliveries.length > 0 ? deliveries.map((delivery) => <Post type='delivery' data={delivery} key={delivery.id}/>) : <div>없음</div>}
+          {deliveries.length > 0 ? deliveries.map((delivery) => <Post type='delivery' data={delivery} key={delivery.id}/>) : <div>{deliveries.message}</div>}
         </div>
         )
       }

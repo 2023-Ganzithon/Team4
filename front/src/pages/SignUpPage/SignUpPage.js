@@ -78,28 +78,25 @@ const SignUpPage = () => {
       };
       console.log(request);
 
+      try {
       const response = await API.post("/signup/", request, {headers: {
         'Content-Type': 'application/json'
       }});
       console.log(response);
-      const { errorCause } = response.data;
       if (response.status === 201) {
-        alert('성공')
+        alert('성공');
         navigate("/login");
-      } else {
-        // eslint-disable-next-line default-case
-        switch (errorCause) {
-          case "email":
-            alert("이미 존재하는 이메일 주소입니다.");
-            setEmail("");
-            break;
-          case "phone":
-            alert("이미 존재하는 휴대폰 번호입니다.");
-            setPhone("");
-            break;
-        }
+      } 
+    } catch (error) {
+      const errorMessage = error.response.data;
+      if (errorMessage.email) {
+        alert(`이미 존재하는 이메일 주소입니다.`);
+      }
+      if (errorMessage.phone) {
+        alert(`이미 존재하는 휴대폰 번호입니다.`);
       }
     }
+  }
   };
 
   return (
