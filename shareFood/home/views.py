@@ -12,6 +12,7 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 
 from django.db.models import Q
+from math import cos, radians
 
 #권한설정
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -82,6 +83,10 @@ class DeliveryViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         search_query = request.query_params.get('search', None)
         is_completed = request.query_params.get('is_completed', None)
+        latitude = request.query_params.get('latitude', None)
+        longitude = request.query_params.get('longitude', None)
+        radius = request.query_params.get('radius', None)
+
 
         # 기본 queryset은 모든 게시글
         queryset = self.queryset.all()
@@ -93,7 +98,24 @@ class DeliveryViewSet(viewsets.ModelViewSet):
         if is_completed is not None:
             queryset = queryset.filter(is_completed=is_completed.lower() == 'true')
 
-        
+        #위치 정보를 이용한 필터링
+        if latitude is not None and longitude is not None and radius is not None:
+        #  # 일반적인 경우의 위치 필터링
+        #     queryset = queryset.filter(
+        #         latitude__range=(float(latitude) - float(radius), float(latitude) + float(radius)),
+        #         longitude__range=(float(longitude) - float(radius), float(longitude) + float(radius)),
+        #     )
+        # 일반적인 FloatField를 사용하는 경우
+            min_latitude = float(latitude) - (float(radius) / 111.32)  # 1도는 약 111.32km
+            max_latitude = float(latitude) + (float(radius) / 111.32)
+            min_longitude = float(longitude) - (float(radius) / (111.32 * cos(radians(float(latitude)))))
+            max_longitude = float(longitude) + (float(radius) / (111.32 * cos(radians(float(latitude)))))
+
+            queryset = queryset.filter(
+                latitude__range=(min_latitude, max_latitude),
+                longitude__range=(min_longitude, max_longitude),
+            )
+
         # 검색이 이루어졌을 때 최근 검색어를 저장
         if request.user.is_authenticated and search_query is not None:
             RecentSearchView.add_to_recent_searches(request.user, search_query)
@@ -114,6 +136,7 @@ class GroceryViewSet(viewsets.ModelViewSet):
     queryset = Grocery.objects.all().order_by('-id') # 최근글이 앞으로 오도록 정렬(default)
     serializer_class = GrocerySerializer
     permission_classes = [IsOwnerOrReadOnly]
+    
 
     #def perform_create(self, serializer):
         #serializer.save(user = self.request.user)
@@ -160,7 +183,11 @@ class GroceryViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         search_query = request.query_params.get('search', None)
         is_completed = request.query_params.get('is_completed', None)
+        latitude = request.query_params.get('latitude', None)
+        longitude = request.query_params.get('longitude', None)
+        radius = request.query_params.get('radius', None)
 
+        
         # 기본 queryset은 모든 게시글
         queryset = self.queryset.all()
 
@@ -171,7 +198,24 @@ class GroceryViewSet(viewsets.ModelViewSet):
         if is_completed is not None:
             queryset = queryset.filter(is_completed=is_completed.lower() == 'true')
 
-        
+        #위치 정보를 이용한 필터링
+        if latitude is not None and longitude is not None and radius is not None:
+        #  # 일반적인 경우의 위치 필터링
+        #     queryset = queryset.filter(
+        #         latitude__range=(float(latitude) - float(radius), float(latitude) + float(radius)),
+        #         longitude__range=(float(longitude) - float(radius), float(longitude) + float(radius)),
+        #     )
+        # 일반적인 FloatField를 사용하는 경우
+            min_latitude = float(latitude) - (float(radius) / 111.32)  # 1도는 약 111.32km
+            max_latitude = float(latitude) + (float(radius) / 111.32)
+            min_longitude = float(longitude) - (float(radius) / (111.32 * cos(radians(float(latitude)))))
+            max_longitude = float(longitude) + (float(radius) / (111.32 * cos(radians(float(latitude)))))
+
+            queryset = queryset.filter(
+                latitude__range=(min_latitude, max_latitude),
+                longitude__range=(min_longitude, max_longitude),
+            )
+
         # 검색이 이루어졌을 때 최근 검색어를 저장
         if request.user.is_authenticated and search_query is not None:
             RecentSearchView.add_to_recent_searches(request.user, search_query)
@@ -187,6 +231,8 @@ class GroceryViewSet(viewsets.ModelViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+    
+
 
 #댓글 CR
 class DeliveryCommentView(APIView):   # 댓글 리스트
@@ -305,28 +351,7 @@ class GroceryLikeView(APIView):   # 게시글 좋아요
         else:
             return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
-# #게시글 신청
-# class DeliveryApplicationView(APIView):
-#     permission_classes = [IsOwnerOrReadOnly]
-#     def post(self, request, post_id):
-#         post = get_object_or_404(Delivery, pk=post_id)
-#         serializer = DeliveryApplicationSerializer(data={'user': request.user.id, 'post': post_id})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class GroceryApplicationView(APIView):
-#     permission_classes = [IsOwnerOrReadOnly]
-#     def post(self, request, post_id):
-#         post = get_object_or_404(Grocery, pk=post_id)
-#         serializer = GroceryApplicationSerializer(data={'user': request.user.id, 'post': post_id})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 # 마이페이지
 class UserProfileView(APIView):
@@ -447,3 +472,5 @@ class GroceryApplicationView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
