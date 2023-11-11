@@ -1,13 +1,27 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import styles from "./MainPage.module.css";
 import Post from "../../components/MainPage/Post"
 import Loading from "../../assets/image/loading.gif"
 import MapIcon from "../../assets/image/map_icon.png"
 const MainPage = () => {
+  // type: ingredients / delivery
   const [listType, setListType] = useState('ingredients');
   const [showLocationModal, setShowLocationModal] = useState(true);
   const [inputLocationValue, setInputLocationValue] = useState('');
+  const [deliveries, setDeliveries] = useState([]);
+  const [groceries, setGroceries] = useState([]);
+
+  
+  
+
+  const Axios = axios.create({
+    baseURL: "https://33000086-b2a7-409c-bd45-5ea52501a43d.mock.pstmn.io",
+    headers: {
+      accept: "application/json",
+    },
+  });
+
   const changeType = (type) => {
     if (type === listType) {
       return
@@ -24,7 +38,7 @@ const MainPage = () => {
 
     // 서버에 데이터 전송
     try {
-      const response = await axios.post('서버 URL', { location: inputLocationValue });
+      const response = await Axios.post('서버 URL', { location: inputLocationValue });
       console.log(response.data);
       // 성공적으로 데이터를 전송한 후의 처리를 여기에 작성
     } catch (error) {
@@ -38,8 +52,31 @@ const MainPage = () => {
   const handleClickModalContent = (e) => {
     e.stopPropagation();
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [deliveryResponse, groceryResponse] = await Promise.all([
+          Axios.get("/home/deliveries"),
+          Axios.get("/home/groceries")
+        ]);
+        const jsonDeliveries = deliveryResponse.data;
+        const jsonGroceries = groceryResponse.data;
+        console.log(jsonDeliveries);
+        console.log(jsonGroceries);
+  
+        setDeliveries(jsonDeliveries);
+        setGroceries(jsonGroceries);
+        // 추가적으로 필요한 처리를 여기에 작성하세요.
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchData();
+  }, [])
+
   return (
     <>
+    {/* 위치 정보 모달 처리 필요 */}
     {showLocationModal ?
       <div className={styles.location_modal} onClick={closeModal}>
         <form className={styles.modal_content} onSubmit={handleSubmit} onClick={handleClickModalContent}>
@@ -75,11 +112,15 @@ const MainPage = () => {
             color: 'black'
             }}>배달음식</div>
         </div>
-
+        {listType === 'ingredients' ? (
         <div className={styles.posts_lists}>
-          <Post type={listType}/>
-          <Post/>
+          {groceries.map((grocery) => <Post type='ingredients' data={grocery} key={grocery.id}/>)}
+        </div> ) : (
+          <div className={styles.posts_lists}>
+          {deliveries.map((delivery) => <Post type='delivery' data={delivery} key={delivery.id}/>)}
         </div>
+        )
+      }
       </div>
     </>
   )

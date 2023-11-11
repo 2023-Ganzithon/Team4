@@ -62,6 +62,6 @@ a {
   border-color: #4CAF50 transparent transparent transparent;  /* 상하좌우 테두리 색상 */
   transform: translateX(-50%);  /* 화살표가 말풍선의 중앙에 오도록 */
 }
-a:hover {
+.modal > a:hover {
   color: #D9D9D9;
 }
