@@ -46,8 +46,8 @@ const LowerNavBar = () => {
     <div className={styles.lowerNavBar}>
       {showModal ? <div className={styles.modal} ref={modalRef} onClick={closeModal}>
         {/* 상태값 전달하기 */}
-        <Link to="/write">식재료 판매/함께 구매</Link>
-        <Link to="/write">배달음식 함께 주문</Link>
+        <Link to="/write" state={{type : 'grocery'}}>식재료 판매/함께 구매</Link>
+        <Link to="/write"state={{type : 'delivery'}}>배달음식 함께 주문</Link>
       </div>
       :
       null
