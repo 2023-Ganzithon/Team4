@@ -9,7 +9,7 @@ import ActivatedWrite from '../../assets/image/activated_write_icon.png'
 import Home from '../../assets/image/home_icon.png'
 import ActivatedHome from '../../assets/image/activated_home_icon.png'
 
-export const LowerNavBar = () => {
+const LowerNavBar = () => {
   const [navType, setNavType] = useState('home');
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef();
@@ -73,3 +73,5 @@ export const LowerNavBar = () => {
     </div>
   )
 }
+
+export default LowerNavBar;
