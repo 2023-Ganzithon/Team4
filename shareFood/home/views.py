@@ -351,28 +351,7 @@ class GroceryLikeView(APIView):   # 게시글 좋아요
         else:
             return Response(serializer.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
-# #게시글 신청
-# class DeliveryApplicationView(APIView):
-#     permission_classes = [IsOwnerOrReadOnly]
-#     def post(self, request, post_id):
-#         post = get_object_or_404(Delivery, pk=post_id)
-#         serializer = DeliveryApplicationSerializer(data={'user': request.user.id, 'post': post_id})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class GroceryApplicationView(APIView):
-#     permission_classes = [IsOwnerOrReadOnly]
-#     def post(self, request, post_id):
-#         post = get_object_or_404(Grocery, pk=post_id)
-#         serializer = GroceryApplicationSerializer(data={'user': request.user.id, 'post': post_id})
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=status.HTTP_201_CREATED)
-#         else:
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 # 마이페이지
 class UserProfileView(APIView):
@@ -495,27 +474,3 @@ class GroceryApplicationView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# from django.contrib.gis.geos import Point
-# from django.contrib.gis.measure import D
-# from .models import Position
-# from .serializers import PositionSerializer
-
-
-
-# class PositionView(APIView):
-#     permission_classes = [IsOwnerOrReadOnly]
-
-#     def get(self, request):
-#         user_latitude = float(request.query_params.get('latitude'))
-#         user_longitude = float(request.query_params.get('longitude'))
-
-#         user_location = Point(user_longitude, user_latitude, srid=4326)  # SRID는 위경도의 좌표 체계를 의미
-        
-#         # 반경 내의 위치 가져오기
-#         locations_within_radius = Position.objects.filter(geolocation__distance_lte=(user_location, D(km=5)))
-#         serializer = PositionSerializer(locations_within_radius, many=True)
-
-#         return Response(serializer.data)
-
-
-   

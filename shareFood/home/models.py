@@ -32,7 +32,6 @@ class Grocery(models.Model):
     location = models.CharField(max_length=100)
     price = models.IntegerField(default=0)
     created_at = models.DateField(auto_now_add=True)
-    image = models.ImageField(upload_to="post_img")
     buy_time = models.CharField(max_length=100, null=True)
     recruitment_num = models.IntegerField(null=True)
     post_type = models.BooleanField(default=False) # False: 팔아요 / True: 같이 사요
@@ -46,8 +45,8 @@ class Grocery(models.Model):
 
 #댓글
 class DeliveryComment(models.Model):
-    post = models.ForeignKey(Delivery, null=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    post = models.ForeignKey(Delivery, null=True, on_delete=models.CASCADE, related_name='delivery_comment')
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='delivery_comment')
     created_at = models.DateField(auto_now_add=True)
     content = models.TextField(max_length=100)
 
@@ -55,8 +54,8 @@ class DeliveryComment(models.Model):
         return self.content
 
 class GroceryComment(models.Model):
-    post = models.ForeignKey(Grocery, null=True, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    post = models.ForeignKey(Grocery, null=True, on_delete=models.CASCADE, related_name='grocery_comment')
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='grocery_comment')
     created_at = models.DateField(auto_now_add=True)
     content = models.TextField(max_length=100)
 
