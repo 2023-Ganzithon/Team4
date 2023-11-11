@@ -1,0 +1,67 @@
+a {
+  text-decoration: none;
+  color: initial;
+}
+.lowerNavBar {
+  width: 375px;
+  height: 86px;
+  background-color: white;
+  position: fixed;
+  top: 679px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  position:absolute;
+}
+.icon_container {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+}
+.icon_text {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60px;
+  cursor: pointer;
+}
+.icon {
+  height: 30px;
+  object-fit: contain;
+}
+.modal {
+  height: 90px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  padding: 0 12px;
+  white-space: nowrap; /*텍스트 한 줄 표시*/
+  position: absolute;
+  top: -95px;
+  left: 50%; /* 부모 요소의 중앙에서 시작 */
+  transform: translateX(-50%); /* 자신의 너비의 절반만큼 왼쪽으로 이동 */
+  border-radius: 6px;
+}
+.modal > a {
+  display: block;
+  text-align: center;
+  line-height: 45px;
+  color: white;
+
+}
+.modal > a:first-child {
+  border-bottom: 1px solid white;
+}
+.modal:after {
+  content: "";
+  position: absolute;
+  top: 100%;  /* 말풍선 아래에 위치 */
+  left: 50%;  /* 중앙에 위치 */
+  border-width: 15px;
+  border-style: solid;
+  border-color: #4CAF50 transparent transparent transparent;  /* 상하좌우 테두리 색상 */
+  transform: translateX(-50%);  /* 화살표가 말풍선의 중앙에 오도록 */
+}
+.modal > a:hover {
+  color: #D9D9D9;
+}
