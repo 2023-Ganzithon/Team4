@@ -116,9 +116,24 @@ class DeliveryApplicationSerializer(serializers.ModelSerializer):
         model = DeliveryApplication
         fields = '__all__'
 
+
 class GroceryApplicationSerializer(serializers.ModelSerializer):
     user = serializers.CharField(source='user.name', read_only=True)
 
     class Meta:
         model = GroceryApplication
         fields = '__all__'
+
+    def create(self, validated_data):
+        post = validated_data['post']
+        user = validated_data['user']
+        grocery_application = GroceryApplication.objects.get_or_create(post=post, user=user)
+
+        post.grocery_application = GroceryApplication.objects.filter(post=post).count()
+        post.save()
+
+        #if not created:
+            #grocery_application.delete()
+        #post.save()
+        
+        return grocery_application
